@@ -10,6 +10,8 @@ public class BankAccount  implements Cloneable{
     private AccountType type;
     private AccountStatus status;
 
+    private  Customer customer;
+
     public void setAccountId(Long accountId) {
         this.accountId = accountId;
     }
@@ -42,6 +44,14 @@ public class BankAccount  implements Cloneable{
         return currency;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     public AccountType getType() {
         return type;
     }
@@ -61,8 +71,10 @@ public class BankAccount  implements Cloneable{
                 ", currency='" + currency + '\'' +
                 ", type=" + type +
                 ", status=" + status +
+                ", customer=" + customer +
                 '}';
     }
+
     public static AccountBuilder builder(){
         return new AccountBuilder();
     }
@@ -95,6 +107,9 @@ public class BankAccount  implements Cloneable{
     }
     @Override
     public BankAccount clone() throws CloneNotSupportedException{
-        return (BankAccount) super.clone();
+        BankAccount bankAccount=(BankAccount) super.clone();
+        bankAccount.setCustomer(this.customer.clone());
+        return bankAccount;
     }
+
 }
